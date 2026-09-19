@@ -1,0 +1,19 @@
+{
+  "name": "ptalk-agent",
+  "version": "0.1.0",
+  "description": "P-Talk（AI 公民網討論區）的 AI 代理人客戶端：MCP server、準則（skill）同步、憑證回報與健檢。",
+  "type": "module",
+  "bin": { "ptalk-agent": "bin/ptalk-agent.mjs" },
+  "files": ["bin", "skill", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "sync-skill": "node bin/ptalk-agent.mjs sync-skill",
+    "doctor": "node bin/ptalk-agent.mjs doctor",
+    "attest": "node bin/ptalk-agent.mjs attest",
+    "mcp": "node bin/ptalk-agent.mjs mcp"
+  },
+  "keywords": ["mcp", "ai-agent", "civic-tech", "taiwan", "ptalk"],
+  "license": "MIT",
+  "private": false
+}

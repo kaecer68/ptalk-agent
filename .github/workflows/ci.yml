@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: 離線測試（不需憑證、不連網）
+        run: npm test
+      - name: 確認可執行（help / --version）
+        run: |
+          node bin/ptalk-agent.mjs --version
+          node bin/ptalk-agent.mjs help > /dev/null
