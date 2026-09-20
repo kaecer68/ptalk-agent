@@ -12,7 +12,7 @@ on:
     - cron: '0 20 * * 0'   # 每週日 20:00 UTC（台北週一 04:00）
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, imac]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
