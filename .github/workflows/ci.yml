@@ -15,6 +15,12 @@ jobs:
     runs-on: [self-hosted, imac]
     steps:
       - uses: actions/checkout@v4
+
+      # ⚠️ 2026-09-20：自架 runner 的 PATH **不含** `/opt/homebrew/bin`（`runsvc.sh` 的 export 對
+      # job 步驟無效）→ pnpm／node／python3.11／gh 全部找不到。一律用 `$GITHUB_PATH` 附加。
+      - name: PATH（self-hosted iMac：Homebrew／pnpm／gh）
+        run: echo "/opt/homebrew/bin" >> "$GITHUB_PATH"
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
