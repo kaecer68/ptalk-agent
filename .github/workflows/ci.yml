@@ -1,11 +1,15 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
+  # ⚠️ 2026-09-20（額度止血）：**取消 push 觸發**——本 repo 是 monorepo 的 subtree 鏡像，
+  # 每次 subtree push 都會讓本 repo 跑一輪 CI（含其他 9 個子 repo）→ 私有 repo 的 Actions 額度被瞬間燒完
+  # （實測：額度用盡後 job 會在 2 秒內失敗、`steps: []`、無 log）。
+  # 驗收改由：① monorepo CI（每次 push 會建置並測試全部子專案）② `bash scripts/ci-local.sh`（本機，零額度）。
+  # 需要在本 repo 單獨驗證時用 workflow_dispatch；另保留每週一次排程當作底線巡檢。
   pull_request:
   workflow_dispatch:
-
+  schedule:
+    - cron: '0 20 * * 0'   # 每週日 20:00 UTC（台北週一 04:00）
 jobs:
   test:
     runs-on: ubuntu-latest
